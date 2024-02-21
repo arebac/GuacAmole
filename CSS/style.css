@@ -1,0 +1,66 @@
+body {
+  background-color: black;
+}
+
+#game-intro {
+  display: flex;
+  justify-content: center;
+  height: 80vh;
+  margin-top: 2%;
+
+}
+
+
+#start-button {
+  position: absolute;
+  top: 69%;
+  left: 48%;
+  height: 100px;
+  background-color: #820fca;
+  color: rgb(252, 250, 250);
+  font-size: 20px;
+  padding: 5px 1px;
+  border: 1;
+  cursor: pointer;
+  border-radius: 80px;
+}
+
+#game-screen {
+    
+    align-content:center;
+    justify-content: center;
+    background-image: url(../Images/field.webp);
+    background-size: cover;
+    position: relative;
+    
+  
+  }
+
+  #game-container {
+    display: flex;
+    width: 100vw;
+    padding: 20px 20px;
+    justify-content: center;
+  }
+
+  
+  #ROAR {
+
+    position: relative;
+    animation: mymove 3s linear infinite;
+  }
+
+  
+  @keyframes mymove {
+    0%, 100% {
+      bottom: 5px;
+    }
+    50% {
+      bottom: 75px;
+    }
+  }
+
+  #holes{
+    border: 1px solid;
+    overflow: show;
+  }
