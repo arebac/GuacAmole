@@ -232,6 +232,8 @@ class Board {
 
 
   youWon() {
+    this.lives=3;
+    this.gameOver = true;
     this.gameScreen.style.display = "none";
     this.youWinScreen.style.height = `${this.height}px`;
     this.youWinScreen.style.width = `${this.width}px`;
