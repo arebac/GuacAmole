@@ -39,6 +39,15 @@ body {
   position: relative;
 }
 
+#game-win{
+  
+  align-content: center;
+  justify-content: center;
+  background-image: url(../Images/game-win.webp);
+  background-size: cover;
+  position: relative;
+}
+
 #game-container {
   display: flex;
   width: 100vw;

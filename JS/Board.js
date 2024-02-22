@@ -2,11 +2,12 @@ class Board {
   constructor() {
     this.startScreen = document.querySelector("#game-intro");
     this.gameScreen = document.querySelector("#game-screen");
+    this.youWinScreen = document.querySelector("#game-win");
     this.gameEnd = document.querySelector("#game-end");
     this.scoreSpan = document.querySelector("#score");
     this.livesSpan = document.querySelector("#lives");
-    this.showStats =  document.querySelector("#stats")
-    this.restartButton =  document.querySelector("#therestartButton")
+    this.showStats = document.querySelector("#stats");
+    this.restartButton = document.querySelector("#therestartButton");
     this.height = 800;
     this.width = 800;
     this.gatorz = [];
@@ -15,7 +16,7 @@ class Board {
     this.lives = 3;
     this.gameOver = false;
     this.gameIntervalId = null;
-    this.gameLoopFrequency = 1000 / 50;
+    this.gameLoopFrequency = 1000 / 100;
     this.frames = 0;
     let newDiv1 = document.createElement("div");
     let newDiv2 = document.createElement("div");
@@ -52,14 +53,8 @@ class Board {
     ];
   }
 
-
-
-
-
   start() {
-
-    this.restartButton.style.display="none"
-
+    this.restartButton.style.display = "none";
 
     console.log(this.gameScreen);
     console.log(this.gameEnd);
@@ -107,15 +102,12 @@ class Board {
       }
     }
 
-
-
-
     // Hide the start screen
     this.startScreen.style.display = "none";
 
     // Show the game screen
     this.gameScreen.style.display = "flex";
-    this.showStats.style.display="block";
+    this.showStats.style.display = "block";
     // this.scoreSpan.innerText =  this.score
     // Runs the gameLoop on a fequency of 60 times per second. Also stores the ID of the interval.
     this.gameIntervalId = setInterval(() => {
@@ -140,6 +132,11 @@ class Board {
       this.score += 10;
       this.scoreSpan.innerText = `${this.score}`;
       console.log(this.score);
+      if (this.score === 200) {
+        this.youWon();
+        this.gameOver = true;
+        
+      }
     });
 
     setTimeout(() => {
@@ -161,7 +158,7 @@ class Board {
     abuelaIMG.setAttribute("id", "grandma");
     abuelaIMG.src = "../Images/grandmama.png";
     abuelaIMG.style.width = 80 + "px";
-    abuelaIMG.style.height = 80 + "px";
+    abuelaIMG.style.height = 90 + "px";
     let clicked = false;
     let randomIndex = Math.floor(Math.random() * this.divs.length);
 
@@ -191,7 +188,7 @@ class Board {
   }
 
   gameLoop() {
-    this.frames += 1;
+    this.frames += 3;
     const randomNumber = Math.floor(Math.random() * 2);
     console.log(this.lives);
     if (this.frames % 120 === 0) {
@@ -209,9 +206,11 @@ class Board {
     }
   }
 
+
+
   gameISover() {
     // this.gameOver=true;
-    this.restartButton.style.display="flex"
+    this.restartButton.style.display = "flex";
     console.log(this.gameScreen);
     console.log(this.gameEnd);
     this.gameScreen.style.display = "none";
@@ -219,18 +218,26 @@ class Board {
     this.gameEnd.style.height = `${this.height}px`;
     this.gameEnd.style.width = `${this.width}px`;
     this.gameEnd.style.display = "flex";
-  
   }
 
-  Restart() {  
-    
+  Restart() {
     this.livesSpan.innerText = 3;
     this.scoreSpan.innerText = 0;
     this.lives = 3;
     this.score = 0;
     this.gameEnd.style.display = "none";
-
+    this.youWinScreen.style.display="none" ;
     this.gameOver = false;
+  }
+
+
+  youWon() {
+    this.gameScreen.style.display = "none";
+    this.youWinScreen.style.height = `${this.height}px`;
+    this.youWinScreen.style.width = `${this.width}px`;
+    console.log("YOU HAVE WOOON!!!!!")
+    this.youWinScreen.style.display = "flex";
+    this.restartButton.style.display = "flex";    
 
   }
 }
