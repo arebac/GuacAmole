@@ -119,7 +119,7 @@ class Board {
     let gatorImg = document.createElement("img");
     let clicked = false;
     gatorImg.setAttribute("id", "ROAR");
-    gatorImg.src = "../Images/gatorz.png";
+    gatorImg.src = "./Images/gatorz.png";
     gatorImg.style.width = 80 + "px";
     gatorImg.style.height = 80 + "px";
     let randomIndex = Math.floor(Math.random() * this.divs.length);
@@ -156,7 +156,7 @@ class Board {
   addAbuela() {
     let abuelaIMG = document.createElement("img");
     abuelaIMG.setAttribute("id", "grandma");
-    abuelaIMG.src = "../Images/grandmama.png";
+    abuelaIMG.src = "./Images/grandmama.png";
     abuelaIMG.style.width = 80 + "px";
     abuelaIMG.style.height = 90 + "px";
     let clicked = false;
