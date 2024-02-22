@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: rgb(0, 0, 0);
 }
 
 #game-intro {
@@ -7,9 +7,7 @@ body {
   justify-content: center;
   height: 80vh;
   margin-top: 2%;
-
 }
-
 
 #start-button {
   position: absolute;
@@ -26,41 +24,70 @@ body {
 }
 
 #game-screen {
-    
-    align-content:center;
-    justify-content: center;
-    background-image: url(../Images/field.webp);
-    background-size: cover;
-    position: relative;
-    
-  
-  }
+  align-content: center;
+  justify-content: center;
+  background-image: url(../Images/field.webp);
+  background-size: cover;
+  position: relative;
+}
 
-  #game-container {
-    display: flex;
-    width: 100vw;
-    padding: 20px 20px;
-    justify-content: center;
-  }
+#game-end{
+  align-content: center;
+  justify-content: center;
+  background-image: url(../Images/Game-Over-Screen.webp);
+  background-size: cover;
+  position: relative;
+}
 
-  
-  #ROAR {
+#game-container {
+  display: flex;
+  width: 100vw;
+  padding: 20px 20px;
+  justify-content: center;
+}
 
-    position: relative;
-    animation: mymove 3s linear infinite;
-  }
+#ROAR {
+  position: relative;
+  animation: mymove 1.5s linear infinite;
+}
 
-  
-  @keyframes mymove {
-    0%, 100% {
-      bottom: 5px;
-    }
-    50% {
-      bottom: 75px;
-    }
-  }
+#grandma {
+  position: relative;
+  animation: mymove 1.5s linear infinite;
+}
 
-  #holes{
-    border: 1px solid;
-    overflow: show;
+@keyframes mymove {
+  0%,
+  100% {
+    bottom: 5px;
   }
+  50% {
+    bottom: 75px;
+  }
+}
+
+#holes {
+  overflow: show;
+}
+
+
+#stats {
+  display: none;
+  color:aliceblue;
+  justify-content: center;
+  width: 100px;
+  height: 150px;
+  border: 5px solid;
+  padding: 2px 2px;
+  background-color: rgb(0, 24, 238);
+}
+
+#therestartButton{
+  display:none;
+  position:absolute;
+  justify-content:space-around;
+  align-items: flex-end;
+  left:1000px;
+
+}
+

@@ -15,23 +15,27 @@
     <main>
       <div id="game-intro">
         <img src="./Images/Start-Screen.webp" alt="" class="logo-img" />
-        <button id="start-button">Start Game</button>
+        <div id="theStartButton">
+        <button id="start-button">Start Game</button></div>
       </div>
 
-      
       <div id="game-container">
-        <div>
+        <div id="stats">
           <h2>Stats</h2>
           <p>Score: <span id="score">0</span></p>
           <p>Lives: <span id="lives">3</span></p>
         </div>
         <!-- #game-screen is initially hidden using CSS style display: none -->
         <div id="game-screen"></div>
+        
+        <!-- Game Over -->
+        <div id="game-end"></div>
       </div>
-
-
-
-
+      <div id="therestartButton">
+      <!-- The below 'Restart Quiz' button is commented out because it is not used initially -->
+       <button id="restartButton" class="button-secondary">Restart Game</button></div>
+    </div>
+      </div>
     </main>
     <script type="text/javascript" src="JS/script.js"></script>
     <script type="text/javascript" src="JS/Board.js"></script>

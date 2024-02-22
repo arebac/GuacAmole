@@ -2,15 +2,20 @@ class Board {
   constructor() {
     this.startScreen = document.querySelector("#game-intro");
     this.gameScreen = document.querySelector("#game-screen");
-    this.gameEnd = document.getElementById("game-end");
+    this.gameEnd = document.querySelector("#game-end");
+    this.scoreSpan = document.querySelector("#score");
+    this.livesSpan = document.querySelector("#lives");
+    this.showStats =  document.querySelector("#stats")
+    this.restartButton =  document.querySelector("#therestartButton")
     this.height = 800;
     this.width = 800;
     this.gatorz = [];
+    this.abuela = [];
     this.score = 0;
     this.lives = 3;
     this.gameOver = false;
     this.gameIntervalId = null;
-    this.gameLoopFrequency = 1000 / 60;
+    this.gameLoopFrequency = 1000 / 50;
     this.frames = 0;
     let newDiv1 = document.createElement("div");
     let newDiv2 = document.createElement("div");
@@ -47,7 +52,15 @@ class Board {
     ];
   }
 
+
+
+
+
   start() {
+
+    this.restartButton.style.display="none"
+
+
     console.log(this.gameScreen);
     console.log(this.gameEnd);
     // Set the height and width of the game screen
@@ -60,13 +73,13 @@ class Board {
     for (let i = 0; i < this.divs.length; i++) {
       if (i < 5) {
         this.gameScreen.appendChild(this.divs[i]);
-        this.divs[i].style.left = xStart+ "px";
+        this.divs[i].style.left = xStart + "px";
         this.divs[i].style.top = yStart + "px";
         this.divs[i].style.width = "70px";
         this.divs[i].style.height = "40px";
         this.divs[i].style.zIndex = "10";
         this.divs[i].style.position = "absolute";
-        this.divs[i].setAttribute("id","holes")
+        this.divs[i].setAttribute("id", "holes");
 
         xStart += 127;
       } else if (i >= 5 && i < 10) {
@@ -74,34 +87,36 @@ class Board {
         console.log("Hello from xStart", xStart);
         yStart = 325;
         this.divs[i].style.left = `${xStart - (10 - i) * 127}` + "px";
-        this.divs[i].style.top = yStart   + "px";
+        this.divs[i].style.top = yStart + "px";
         this.divs[i].style.width = "70px";
         this.divs[i].style.height = "40px";
         this.divs[i].style.zIndex = "10";
         this.divs[i].style.position = "absolute";
-        this.divs[i].setAttribute("id","holes")
-
+        this.divs[i].setAttribute("id", "holes");
       } else {
         this.gameScreen.appendChild(this.divs[i]);
         console.log("Hello from xStart", xStart);
         yStart = 500;
         this.divs[i].style.left = `${xStart - (15 - i) * 127}` + "px";
-        this.divs[i].style.top =yStart + "px";
+        this.divs[i].style.top = yStart + "px";
         this.divs[i].style.width = "70px";
         this.divs[i].style.height = "40px";
         this.divs[i].style.zIndex = "10";
         this.divs[i].style.position = "absolute";
-        this.divs[i].setAttribute("id","holes")
-
+        this.divs[i].setAttribute("id", "holes");
       }
     }
+
+
+
 
     // Hide the start screen
     this.startScreen.style.display = "none";
 
     // Show the game screen
     this.gameScreen.style.display = "flex";
-
+    this.showStats.style.display="block";
+    // this.scoreSpan.innerText =  this.score
     // Runs the gameLoop on a fequency of 60 times per second. Also stores the ID of the interval.
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
@@ -110,32 +125,112 @@ class Board {
 
   addGator() {
     let gatorImg = document.createElement("img");
-    gatorImg.setAttribute("id","ROAR")
-    console.log(gatorImg.id)
+    let clicked = false;
+    gatorImg.setAttribute("id", "ROAR");
     gatorImg.src = "../Images/gatorz.png";
     gatorImg.style.width = 80 + "px";
-    gatorImg.style.height = 70 + "px";
-
+    gatorImg.style.height = 80 + "px";
     let randomIndex = Math.floor(Math.random() * this.divs.length);
-
     this.divs[randomIndex].appendChild(gatorImg);
 
-    setTimeout(() => {
+    gatorImg.addEventListener("click", (e) => {
+      console.log("Whut up");
+      gatorImg.remove();
+      clicked = true;
+      this.score += 10;
+      this.scoreSpan.innerText = `${this.score}`;
+      console.log(this.score);
+    });
 
-      this.divs[randomIndex].removeChild(gatorImg);
-    }, 3000);
+    setTimeout(() => {
+      if (!clicked) {
+        this.divs[randomIndex].removeChild(gatorImg);
+        this.lives -= 1;
+        this.livesSpan.innerText = `${this.lives}`;
+      }
+      if (this.lives <= 0) {
+        console.log("YOOOOOOOOOOOOOO");
+        this.gameOver = true;
+        this.gameISover();
+      }
+    }, 1500);
+  }
+
+  addAbuela() {
+    let abuelaIMG = document.createElement("img");
+    abuelaIMG.setAttribute("id", "grandma");
+    abuelaIMG.src = "../Images/grandmama.png";
+    abuelaIMG.style.width = 80 + "px";
+    abuelaIMG.style.height = 80 + "px";
+    let clicked = false;
+    let randomIndex = Math.floor(Math.random() * this.divs.length);
+
+    this.divs[randomIndex].appendChild(abuelaIMG);
+
+    abuelaIMG.addEventListener("click", (e) => {
+      console.log("you darn kids");
+      abuelaIMG.remove();
+      clicked = true;
+      this.lives -= 1;
+      this.livesSpan.innerText = `${this.lives}`;
+      console.log(this.lives);
+    });
+
+    setTimeout(() => {
+      if (clicked) {
+        this.livesSpan.innerText = `${this.lives}`;
+      } else if (!clicked) {
+        this.divs[randomIndex].removeChild(abuelaIMG);
+      }
+      if (this.lives <= 0) {
+        console.log("IM ABUELITA");
+        this.gameOver = true;
+        this.gameISover();
+      }
+    }, 1500);
   }
 
   gameLoop() {
     this.frames += 1;
+    const randomNumber = Math.floor(Math.random() * 2);
+    console.log(this.lives);
     if (this.frames % 120 === 0) {
-      this.addGator();
+      if (randomNumber) {
+        this.addGator();
+      } else {
+        this.addAbuela();
+      }
     }
 
     // If "gameIsOver" is set to "true" clear the interval to stop the loop
     if (this.gameOver) {
+      console.log("HEEYEYEYEYEYEYEYE");
       clearInterval(this.gameIntervalId);
     }
   }
 
+  gameISover() {
+    // this.gameOver=true;
+    this.restartButton.style.display="flex"
+    console.log(this.gameScreen);
+    console.log(this.gameEnd);
+    this.gameScreen.style.display = "none";
+    // Set the height and width of the game screen
+    this.gameEnd.style.height = `${this.height}px`;
+    this.gameEnd.style.width = `${this.width}px`;
+    this.gameEnd.style.display = "flex";
+  
+  }
+
+  Restart() {  
+    
+    this.livesSpan.innerText = 3;
+    this.scoreSpan.innerText = 0;
+    this.lives = 3;
+    this.score = 0;
+    this.gameEnd.style.display = "none";
+
+    this.gameOver = false;
+
+  }
 }

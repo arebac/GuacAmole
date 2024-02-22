@@ -7,13 +7,21 @@ class MoleNgrandma {
         this.height = 150
         this.element = document.createElement("img");
         this.element.src = '../Images/gatorz.png';
+        this.element2 = document.createElement("img2");
+        this.element.src = '../Images/grandmama.png';
         this.element.style.position = "absolute";
         this.element.style.left = `${this.left}px`;
         this.element.style.top = `${this.top}px`;
         this.element.style.width = `${this.width}px`;
         this.element.style.height = `${this.height}px`;
+        this.element2.style.position = "absolute";
+        this.element2.style.left = `${this.left}px`;
+        this.element2.style.top = `${this.top}px`;
+        this.element2.style.width = `${this.width}px`;
+        this.element2.style.height = `${this.height}px`;
     
         this.gameScreen.appendChild(this.element);
+        this.gameScreen.appendChild(this.element2);
     }
 
     move() {
@@ -24,5 +32,7 @@ class MoleNgrandma {
     updatePosition() {
         this.element.style.left = this.left + "px";
         this.element.style.top = this.top + "px";
+        this.element2.style.left = this.left + "px";
+        this.element2.style.top = this.top + "px";
     }
 }
